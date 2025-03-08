@@ -5,6 +5,7 @@ import typer
 from labtasker.client.cli.task import app
 from labtasker.client.core.cli_utils import cli_utils_decorator, parse_metadata
 from labtasker.client.core.logging import stdout_console
+
 from .impl import get_counts
 
 # For a simpler version, you may refer to 'simple' git branch

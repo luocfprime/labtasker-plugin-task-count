@@ -2,9 +2,8 @@ import argparse
 from pathlib import Path
 
 import tomlkit
-from packaging.version import InvalidVersion, Version
-
 from labtasker_plugin_task_count import __version__
+from packaging.version import InvalidVersion, Version
 
 
 def parse_version(tag: str) -> str:
