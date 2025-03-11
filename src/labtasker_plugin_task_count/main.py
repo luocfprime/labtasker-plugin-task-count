@@ -3,10 +3,10 @@ from typing import Optional
 import typer
 
 from labtasker.client.cli.task import app
-from labtasker.client.core.cli_utils import cli_utils_decorator, parse_dict
+from labtasker.client.core.cli_utils import cli_utils_decorator, parse_filter
 from labtasker.client.core.logging import stdout_console
-from .impl import get_counts
 
+from .impl import get_counts
 
 # For a simpler version, you may refer to 'simple' git branch
 
@@ -26,11 +26,12 @@ def count(
         None,
         "--extra-filter",
         "-f",
-        help='Optional mongodb filter as a dict string (e.g., \'{"$and": [{"metadata.tag": {"$in": ["a", "b"]}}, {"priority": 10}]}\').',
+        help='Optional mongodb filter as a dict string (e.g., \'{"$and": [{"metadata.tag": {"$in": ["a", "b"]}}, {"priority": 10}]}\'). '
+        'Or a Python expression (e.g. \'metadata.tag in ["a", "b"] and priority == 10\')',
     ),
 ):
     """Give a brief summary of the numbers of tasks in each status."""
-    extra_filter = parse_dict(extra_filter)
+    extra_filter = parse_filter(extra_filter)
 
     result = get_counts(limit=limit, extra_filter=extra_filter)
 
