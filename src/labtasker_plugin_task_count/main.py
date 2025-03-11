@@ -3,10 +3,10 @@ from typing import Optional
 import typer
 
 from labtasker.client.cli.task import app
-from labtasker.client.core.cli_utils import cli_utils_decorator, parse_metadata
+from labtasker.client.core.cli_utils import cli_utils_decorator, parse_dict
 from labtasker.client.core.logging import stdout_console
-
 from .impl import get_counts
+
 
 # For a simpler version, you may refer to 'simple' git branch
 
@@ -30,7 +30,7 @@ def count(
     ),
 ):
     """Give a brief summary of the numbers of tasks in each status."""
-    extra_filter = parse_metadata(extra_filter)
+    extra_filter = parse_dict(extra_filter)
 
     result = get_counts(limit=limit, extra_filter=extra_filter)
 
