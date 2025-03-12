@@ -1,10 +1,11 @@
+import json
 from typing import Optional
 
 import typer
 
 from labtasker.client.cli.task import app
 from labtasker.client.core.cli_utils import cli_utils_decorator, parse_filter
-from labtasker.client.core.logging import stdout_console
+from labtasker.client.core.logging import set_verbose, stdout_console, verbose_print
 
 from .impl import get_counts
 
@@ -29,9 +30,18 @@ def count(
         help='Optional mongodb filter as a dict string (e.g., \'{"$and": [{"metadata.tag": {"$in": ["a", "b"]}}, {"priority": 10}]}\'). '
         'Or a Python expression (e.g. \'metadata.tag in ["a", "b"] and priority == 10\')',
     ),
+    verbose: bool = typer.Option(
+        False,
+        "--verbose",
+        "-v",
+        help="Enable verbose output.",
+        callback=set_verbose,
+        is_eager=True,
+    ),
 ):
     """Give a brief summary of the numbers of tasks in each status."""
     extra_filter = parse_filter(extra_filter)
+    verbose_print(f"Parsed filter: {json.dumps(extra_filter, indent=4)}")
 
     result = get_counts(limit=limit, extra_filter=extra_filter)
 
