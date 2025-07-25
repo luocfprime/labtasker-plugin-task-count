@@ -1,4 +1,3 @@
-import json
 from typing import Optional
 
 import typer
@@ -6,6 +5,7 @@ import typer
 from labtasker.client.cli.task import app
 from labtasker.client.core.cli_utils import cli_utils_decorator, parse_filter
 from labtasker.client.core.logging import set_verbose, stdout_console, verbose_print
+from labtasker.client.core.utils import json_serializer
 
 from .impl import get_counts
 
@@ -41,7 +41,7 @@ def count(
 ):
     """Give a brief summary of the numbers of tasks in each status."""
     extra_filter = parse_filter(extra_filter)
-    verbose_print(f"Parsed filter: {json.dumps(extra_filter, indent=4)}")
+    verbose_print(f"Parsed filter: {json_serializer(extra_filter, indent=4)}")
 
     result = get_counts(limit=limit, extra_filter=extra_filter)
 
