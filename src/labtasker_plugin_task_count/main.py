@@ -1,10 +1,10 @@
 from typing import Optional
 
 import typer
-
 from labtasker.client.cli.task import app
 from labtasker.client.core.cli_utils import cli_utils_decorator, parse_filter
-from labtasker.client.core.logging import set_verbose, stdout_console, verbose_print
+from labtasker.client.core.logging import (set_verbose, stdout_console,
+                                           verbose_print)
 from labtasker.client.core.utils import json_serializer
 
 from .impl import get_counts
